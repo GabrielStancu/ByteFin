@@ -5,11 +5,11 @@ namespace DataCollectionService.Business.Environment;
 
 public class LocationGenerator : Generator<Location>
 {
-    private readonly IMeasurementPrefixConfiguration _configuration;
-    private readonly IAllowedValuesConfiguration _allowedValues;
+    private readonly MeasurementPrefixConfiguration _configuration;
+    private readonly AllowedValuesConfiguration _allowedValues;
 
-    public LocationGenerator(IMeasurementPrefixConfiguration measurementPrefix,
-        IAllowedValuesConfiguration allowedValues)
+    public LocationGenerator(MeasurementPrefixConfiguration measurementPrefix,
+        AllowedValuesConfiguration allowedValues)
     {
         _configuration = measurementPrefix;
         _allowedValues = allowedValues;

@@ -5,11 +5,11 @@ namespace DataCollectionService.Business.Environment;
 
 public class TemperatureGenerator : Generator<Temperature>
 {
-    private readonly IMeasurementPrefixConfiguration _measurementPrefix;
-    private readonly IAllowedValuesConfiguration _allowedValues;
+    private readonly MeasurementPrefixConfiguration _measurementPrefix;
+    private readonly AllowedValuesConfiguration _allowedValues;
 
-    public TemperatureGenerator(IMeasurementPrefixConfiguration measurementPrefix,
-        IAllowedValuesConfiguration allowedValues)
+    public TemperatureGenerator(MeasurementPrefixConfiguration measurementPrefix,
+        AllowedValuesConfiguration allowedValues)
     {
         _measurementPrefix = measurementPrefix;
         _allowedValues = allowedValues;

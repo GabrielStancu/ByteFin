@@ -9,7 +9,7 @@ public abstract class DatabaseSettings<T> : IDatabaseSettings<T> where T : Model
     public string DatabaseName { get; } = string.Empty;
     public abstract string CollectionName { get; }
 
-    protected DatabaseSettings(IDatabaseConfiguration config)
+    protected DatabaseSettings(DatabaseConfiguration config)
     {
         ConnectionString = config.ConnectionString;
         DatabaseName = config.DatabaseName;

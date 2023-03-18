@@ -1,6 +1,6 @@
 namespace DataCollectionService.Configuration;
 
-public class MeasurementPrefixConfiguration : IMeasurementPrefixConfiguration
+public class MeasurementPrefixConfiguration
 {
     public string Humidity { get; set; } = null!;
     public string Temperature { get; set; } = null!;

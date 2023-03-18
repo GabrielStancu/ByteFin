@@ -7,7 +7,7 @@ public class LocationSettings : DatabaseSettings<Location>
 {
     public override string CollectionName { get; }
 
-    public LocationSettings(IDatabaseConfiguration config) : base(config)
+    public LocationSettings(DatabaseConfiguration config) : base(config)
     {
         CollectionName = config.LocationCollectionName;
     }

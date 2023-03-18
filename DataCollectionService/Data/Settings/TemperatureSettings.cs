@@ -7,7 +7,7 @@ public class TemperatureSettings : DatabaseSettings<Temperature>
 {
     public override string CollectionName { get; }
 
-    public TemperatureSettings(IDatabaseConfiguration config) : base(config)
+    public TemperatureSettings(DatabaseConfiguration config) : base(config)
     {
         CollectionName = config.TemperatureCollectionName;
     }

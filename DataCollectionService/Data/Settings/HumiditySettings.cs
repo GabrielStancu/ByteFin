@@ -7,7 +7,7 @@ public class HumiditySettings : DatabaseSettings<Humidity>
 {
     public override string CollectionName { get; }
 
-    public HumiditySettings(IDatabaseConfiguration config) : base(config)
+    public HumiditySettings(DatabaseConfiguration config) : base(config)
     {
         CollectionName = config.HumidityCollectionName;
     }

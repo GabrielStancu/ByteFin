@@ -5,7 +5,7 @@ using DataCollectionService.DTOs.Requests;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
-namespace ByteFin.Functions;
+namespace DataCollectionService.Functions;
 
 // TODO: this class will be soon deleted. At the moment it uses the logic to create end data periodically
 // But will soon be replaced by a queue listener function, once the queue and publisher are available
@@ -27,12 +27,12 @@ public class DataGenerator
         _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
 
         // The next object should be received in queue message in a message bus trigger function
-        var environmentParamaters = new EnvironmentParamaters
+        var environmentParameters = new EnvironmentParamaters
         {
             ShipId = "ByteFin01",
             CompartmentId = "Gbe01"
         };
-        var environmentConditions = _generatorService.Generate(environmentParamaters);
+        var environmentConditions = _generatorService.Generate(environmentParameters);
         var serializedConditions = JsonSerializer.Serialize(environmentConditions);
 
         _logger.LogInformation($"Received the following conditions:{Environment.NewLine}{serializedConditions}");

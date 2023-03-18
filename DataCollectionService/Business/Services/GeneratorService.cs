@@ -8,31 +8,31 @@ namespace DataCollectionService.Business.Services;
 public class GeneratorService : IGeneratorService
 {
     private readonly IGenerator<Temperature> _temperatureGenerator;
-    private readonly IGenerator<Humidity> _humiditygenerator;
+    private readonly IGenerator<Humidity> _humidityGenerator;
     private readonly IGenerator<Location> _locationGenerator;
 
     public GeneratorService(
         IGenerator<Temperature> temperatureGenerator,
-        IGenerator<Humidity> humiditygenerator,
+        IGenerator<Humidity> humidityGenerator,
         IGenerator<Location> locationGenerator)
     {
         _temperatureGenerator = temperatureGenerator;
-        _humiditygenerator = humiditygenerator;
+        _humidityGenerator = humidityGenerator;
         _locationGenerator = locationGenerator;
     }
 
-    public EnvironmentConditions? Generate(EnvironmentParamaters paramaters)
+    public EnvironmentConditions? Generate(EnvironmentParamaters parameters)
     {
-        if (paramaters is null || paramaters.ShipId is null || paramaters.CompartmentId is null)
+        if (parameters.ShipId is null || parameters.CompartmentId is null)
             return null;
 
-        var temperature = _temperatureGenerator.Generate(paramaters.ShipId, paramaters.CompartmentId);
-        var humidity = _humiditygenerator.Generate(paramaters.ShipId, paramaters.CompartmentId);
-        var location = _locationGenerator.Generate(paramaters.ShipId, paramaters.CompartmentId);
+        var temperature = _temperatureGenerator.Generate(parameters.ShipId, parameters.CompartmentId);
+        var humidity = _humidityGenerator.Generate(parameters.ShipId, parameters.CompartmentId);
+        var location = _locationGenerator.Generate(parameters.ShipId, parameters.CompartmentId);
 
         // TODO: store in db
 
-        return CreateConditionsResult(temperature, humidity, location, paramaters.ShipId!, paramaters.CompartmentId!);
+        return CreateConditionsResult(temperature, humidity, location, parameters.ShipId!, parameters.CompartmentId!);
     }
 
     private static EnvironmentConditions CreateConditionsResult(Temperature temperature, Humidity humidity, Location location, string shipId, string compartmentId)
