@@ -1,4 +1,4 @@
-namespace DataCollectionService.Business.Models;
+namespace DataCollectionService.Data.Entities;
 
 public class Humidity : ModelBase
 {

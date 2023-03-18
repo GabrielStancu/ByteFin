@@ -1,21 +1,23 @@
-using DataCollectionService.Business.Environment.Models;
-using DataCollectionService.Business.Models;
 using DataCollectionService.Configuration;
+using DataCollectionService.Data.Entities;
 
-namespace DataCollectionService.Business.Environment.Generation;
+namespace DataCollectionService.Business.Environment;
 
 public class HumidityGenerator : Generator<Humidity>
 {
     private readonly IMeasurementPrefixConfiguration _configuration;
+    private readonly IAllowedValuesConfiguration _allowedValues;
 
-    public HumidityGenerator(IMeasurementPrefixConfiguration configuration)
+    public HumidityGenerator(IMeasurementPrefixConfiguration measurementPrefix,
+        IAllowedValuesConfiguration allowedValues)
     {
-        _configuration = configuration;
+        _configuration = measurementPrefix;
+        _allowedValues = allowedValues;
     }
 
-    public override Humidity Generate(MeasurementParameters parameters, string shipId, string compartmentId)
+    public override Humidity Generate(string shipId, string compartmentId)
     {
-        var value = GenerateValue(parameters);
+        var value = GenerateValue(_allowedValues.MinHumidity, _allowedValues.MaxHumidity);
         var timestamp = CurrentTime;
         return new Humidity
         {

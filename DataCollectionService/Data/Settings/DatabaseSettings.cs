@@ -1,8 +1,7 @@
-using DataCollectionService.Business.Models;
 using DataCollectionService.Configuration;
-using DataCollectionService.Data.Settings;
+using DataCollectionService.Data.Entities;
 
-namespace DataCollectionService.Data;
+namespace DataCollectionService.Data.Settings;
 
 public abstract class DatabaseSettings<T> : IDatabaseSettings<T> where T : ModelBase
 {

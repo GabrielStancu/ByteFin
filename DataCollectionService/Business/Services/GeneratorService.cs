@@ -1,8 +1,9 @@
-using DataCollectionService.Business.Environment.Generation;
-using DataCollectionService.Business.Environment.Models;
-using DataCollectionService.Business.Models;
+using DataCollectionService.Business.Environment;
+using DataCollectionService.Data.Entities;
+using DataCollectionService.DTOs.Replies;
+using DataCollectionService.DTOs.Requests;
 
-namespace DataCollectionService.Business;
+namespace DataCollectionService.Business.Services;
 
 public class GeneratorService : IGeneratorService
 {
@@ -22,23 +23,17 @@ public class GeneratorService : IGeneratorService
 
     public EnvironmentConditions? Generate(EnvironmentParamaters paramaters)
     {
-        if (IsIncompleteData(paramaters))
+        if (paramaters is null || paramaters.ShipId is null || paramaters.CompartmentId is null)
             return null;
 
-        var temperature = _temperatureGenerator.Generate(paramaters.TemperatureParameters!, paramaters.ShipId!, paramaters.CompartmentId!);
-        var humidity = _humiditygenerator.Generate(paramaters.HumidityParameters!, paramaters.ShipId!, paramaters.CompartmentId!);
-        var location = _locationGenerator.Generate(paramaters.LocationParameters!, paramaters.ShipId!, paramaters.CompartmentId!);
+        var temperature = _temperatureGenerator.Generate(paramaters.ShipId, paramaters.CompartmentId);
+        var humidity = _humiditygenerator.Generate(paramaters.ShipId, paramaters.CompartmentId);
+        var location = _locationGenerator.Generate(paramaters.ShipId, paramaters.CompartmentId);
 
         // TODO: store in db
 
         return CreateConditionsResult(temperature, humidity, location, paramaters.ShipId!, paramaters.CompartmentId!);
     }
-
-    private static bool IsIncompleteData(EnvironmentParamaters paramaters)
-        => paramaters is null || paramaters.ShipId is null || paramaters.CompartmentId is null
-        || paramaters.TemperatureParameters is null
-        || paramaters.HumidityParameters is null
-        || paramaters.LocationParameters is null;
 
     private static EnvironmentConditions CreateConditionsResult(Temperature temperature, Humidity humidity, Location location, string shipId, string compartmentId)
         => new()

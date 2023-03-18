@@ -1,4 +1,4 @@
-namespace DataCollectionService.Business.Environment.Models;
+namespace DataCollectionService.DTOs.Replies;
 
 public class EnvironmentConditions
 {

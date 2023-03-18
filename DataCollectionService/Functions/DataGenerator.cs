@@ -1,6 +1,7 @@
 using System.Text.Json;
 using DataCollectionService.Business;
-using DataCollectionService.Business.Environment.Models;
+using DataCollectionService.Business.Services;
+using DataCollectionService.DTOs.Requests;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
@@ -29,35 +30,12 @@ public class DataGenerator
         var environmentParamaters = new EnvironmentParamaters
         {
             ShipId = "ByteFin01",
-            CompartmentId = "Gbe01",
-            TemperatureParameters = new MeasurementParameters
-            {
-                MinPossible = -50,
-                MaxPossible = 50
-            },
-            HumidityParameters = new MeasurementParameters
-            {
-                MinPossible = 0,
-                MaxPossible = 100
-            },
-            LocationParameters = new LocationParameters
-            {
-                LatitudeParameters = new MeasurementParameters
-                {
-                    MinPossible = -180,
-                    MaxPossible = 180
-                },
-                LongitudeParameters = new MeasurementParameters
-                {
-                    MinPossible = -180,
-                    MaxPossible = 180
-                }
-            }
+            CompartmentId = "Gbe01"
         };
         var environmentConditions = _generatorService.Generate(environmentParamaters);
         var serializedConditions = JsonSerializer.Serialize(environmentConditions);
-        _logger.LogInformation($"Received the following conditions:{Environment.NewLine}{serializedConditions}");
 
+        _logger.LogInformation($"Received the following conditions:{Environment.NewLine}{serializedConditions}");
         _logger.LogInformation($"Executed function. Next timer schedule at: {timer.ScheduleStatus?.Next ?? DateTime.MaxValue}");
     }
 }

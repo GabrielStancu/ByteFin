@@ -1,7 +1,7 @@
-using DataCollectionService.Business;
-using DataCollectionService.Business.Environment.Generation;
-using DataCollectionService.Business.Models;
+using DataCollectionService.Business.Environment;
+using DataCollectionService.Business.Services;
 using DataCollectionService.Configuration;
+using DataCollectionService.Data.Entities;
 using DataCollectionService.Data.Settings;
 using DataCollectionService.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +29,11 @@ var host = new HostBuilder()
             context.Configuration.GetSection("MeasurmentPrefix"));
         services.AddSingleton<IMeasurementPrefixConfiguration>(provider =>
             provider.GetRequiredService<IOptions<MeasurementPrefixConfiguration>>().Value);
+
+        services.Configure<AllowedValuesConfiguration>(
+            context.Configuration.GetSection("AllowedValues"));
+        services.AddSingleton<IAllowedValuesConfiguration>(provider =>
+            provider.GetRequiredService<IOptions<AllowedValuesConfiguration>>().Value);
 
         // Services
         services.AddScoped<IGeneratorService, GeneratorService>();

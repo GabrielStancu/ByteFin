@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace DataCollectionService.Business.Models;
+namespace DataCollectionService.Data.Entities;
 
 public class ModelBase
 {

@@ -1,5 +1,5 @@
-using DataCollectionService.Business.Models;
 using DataCollectionService.Configuration;
+using DataCollectionService.Data.Entities;
 
 namespace DataCollectionService.Data.Settings;
 

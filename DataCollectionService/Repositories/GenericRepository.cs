@@ -1,4 +1,4 @@
-using DataCollectionService.Business.Models;
+using DataCollectionService.Data.Entities;
 using DataCollectionService.Data.Settings;
 using MongoDB.Driver;
 

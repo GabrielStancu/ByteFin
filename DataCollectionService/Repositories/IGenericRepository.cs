@@ -1,4 +1,4 @@
-using DataCollectionService.Business.Models;
+using DataCollectionService.Data.Entities;
 
 namespace DataCollectionService.Repositories;
 

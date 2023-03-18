@@ -2,6 +2,29 @@
   "IsEncrypted": false,
   "Values": {
     "AzureWebJobsStorage": "",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated"
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "Database": {
+      "ConnectionString": "",
+      "DatabaseName": "",
+      "TemperatureCollectionName": "",
+      "LocationCollectionName": "",
+      "HumidityCollectionName": "",
+      "ParametersCollectionName": ""
+    },
+    "MeasurmentPrefix": {
+      "Temperature": "tmp",
+      "Humidity": "hum",
+      "Location": "loc"
+    },
+    "AllowedValues": {
+      "MinTemperature": -50,
+      "MaxTemperature": 50,
+      "MinHumidity": 0,
+      "MaxHumidity": 100,
+      "MinLongitude": -180,
+      "MaxLongitude": 180,
+      "MinLatitude": -90,
+      "MaxLatitude": 90
+    }
   }
 }
