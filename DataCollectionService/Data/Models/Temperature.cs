@@ -4,5 +4,5 @@ namespace DataCollectionService.Business.Models;
 
 public class Temperature : ModelBase
 {
-    public decimal CelsiusDeg { get; set; }
+    public double CelsiusDeg { get; set; }
 }
