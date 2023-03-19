@@ -20,13 +20,13 @@ public class GenericRepository<T> : IGenericRepository<T> where T : ModelBase
         await _collection.DeleteOneAsync(e => e.Id == id);
     }
 
-    public async Task<T> GetAsync(string id)
+    public async Task<T?> GetAsync(string id)
     {
         var entity = await _collection.FindAsync(e => e.Id == id);
         return await entity.FirstOrDefaultAsync();
     }
 
-    public async Task<IEnumerable<T>> GetAllAsync()
+    public async Task<IEnumerable<T?>?> GetAllAsync()
     {
         var entities = await _collection.FindAsync(FilterDefinition<T>.Empty);
         return await entities.ToListAsync();
@@ -57,7 +57,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : ModelBase
         await _collection.ReplaceOneAsync(e => e.Id == id, entity);
     }
 
-    public async Task<T?> GetLastOccurenceAsync()
+    public async Task<T?> GetLastOccurrenceAsync()
     {
         var entities = await _collection.Aggregate()
             .Group(e => e.Id,

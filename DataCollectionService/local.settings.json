@@ -4,12 +4,11 @@
         "AzureWebJobsStorage": "UseDevelopmentStorage=true",
         "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
 
-        "Database:ConnectionString": "",
-        "Database:DatabaseName": "",
-        "Database:TemperatureCollectionName": "",
-        "Database:LocationCollectionName": "",
-        "Database:HumidityCollectionName": "",
-        "Database:ParametersCollectionName": "",
+        "Database:ConnectionString": "mongodb://localhost:27017",
+        "Database:DatabaseName": "ByteFinDb",
+        "Database:TemperatureCollectionName": "Temperatures",
+        "Database:LocationCollectionName": "Locations",
+        "Database:HumidityCollectionName": "Humidities",
 
         "MeasurementPrefix:Temperature": "tmp",
         "MeasurementPrefix:Humidity": "hum",
@@ -22,7 +21,6 @@
         "AllowedValues:MinLongitude": -180,
         "AllowedValues:MaxLongitude": 180,
         "AllowedValues:MinLatitude": -90,
-        "AllowedValues:MaxLatitude": 90,
-        "AllowedValues:MaxDelta": 1
+        "AllowedValues:MaxLatitude": 90
     }
 }

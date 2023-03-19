@@ -10,5 +10,4 @@ public class AllowedValuesConfiguration
     public double MaxLongitude { get; set; }
     public double MinLatitude { get; set; }
     public double MaxLatitude { get; set; }
-    public double MaxDelta { get; set; } // TODO: this will be used to generate close values based on historical trend
 }

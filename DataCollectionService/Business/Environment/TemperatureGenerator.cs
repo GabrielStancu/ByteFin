@@ -1,24 +1,30 @@
 using DataCollectionService.Configuration;
 using DataCollectionService.Data.Entities;
+using DataCollectionService.Repositories;
 
 namespace DataCollectionService.Business.Environment;
 
 public class TemperatureGenerator : Generator<Temperature>
 {
+    private readonly IGenericRepository<Temperature> _temperatureRepository;
     private readonly MeasurementPrefixConfiguration _measurementPrefix;
     private readonly AllowedValuesConfiguration _allowedValues;
 
-    public TemperatureGenerator(MeasurementPrefixConfiguration measurementPrefix,
+    public TemperatureGenerator(IGenericRepository<Temperature> temperatureRepository,
+        MeasurementPrefixConfiguration measurementPrefix,
         AllowedValuesConfiguration allowedValues)
     {
+        _temperatureRepository = temperatureRepository;
         _measurementPrefix = measurementPrefix;
         _allowedValues = allowedValues;
     }
 
-    public override Temperature Generate(string shipId, string compartmentId)
+    public override async Task<Temperature> GenerateAsync(string shipId, string compartmentId)
     {
-        var value = GenerateValue(_allowedValues.MinTemperature, _allowedValues.MaxTemperature);
+        var lastOccurrence = await _temperatureRepository.GetLastOccurrenceAsync();
+        var celsiusDeg = GenerateValue(lastOccurrence?.CelsiusDeg, _allowedValues.MinTemperature, _allowedValues.MaxTemperature);
         var timestamp = CurrentTime;
+
         return new Temperature
         {
             Id = GenerateId(_measurementPrefix.Humidity, shipId, compartmentId, timestamp),
@@ -26,7 +32,7 @@ public class TemperatureGenerator : Generator<Temperature>
             CompartmentId = compartmentId,
             TimestampUtc = timestamp,
             Deleted = false,
-            CelsiusDeg = value
+            CelsiusDeg = celsiusDeg
         };
     }
 }

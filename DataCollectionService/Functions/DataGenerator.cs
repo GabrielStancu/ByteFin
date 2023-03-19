@@ -32,7 +32,7 @@ public class DataGenerator
             ShipId = "ByteFin01",
             CompartmentId = "Gbe01"
         };
-        var environmentConditions = _generatorService.Generate(environmentParameters);
+        var environmentConditions = _generatorService.GenerateAsync(environmentParameters);
         var serializedConditions = JsonSerializer.Serialize(environmentConditions);
 
         _logger.LogInformation($"Received the following conditions:{Environment.NewLine}{serializedConditions}");

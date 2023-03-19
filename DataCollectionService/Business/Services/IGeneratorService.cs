@@ -5,5 +5,5 @@ namespace DataCollectionService.Business.Services;
 
 public interface IGeneratorService
 {
-    public EnvironmentConditions? Generate(EnvironmentParamaters parameters);
+    public Task<EnvironmentConditions?> GenerateAsync(EnvironmentParamaters parameters);
 }
