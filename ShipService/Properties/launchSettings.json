@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "ShipService": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7260"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 32296,
+      "useSSL": false
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+      "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+      "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+
+      "Database:ConnectionString": "mongodb://localhost:27017",
+      "Database:DatabaseName": "ByteFinDb",
+      "Database:ShipCollectionName": "Ships",
+      "Database:CompartmentCollectionName": "Compartments",
+
+      "Prefixes:Ship": "shp",
+      "Prefixes:Compartment": "cmp" 
+    }
+}
