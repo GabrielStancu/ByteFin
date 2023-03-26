@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
-using ShipService.Business.Services;
+using ShipService.Business.ShipDataCollection;
 using ShipService.Business.Timer;
 
 namespace ShipService

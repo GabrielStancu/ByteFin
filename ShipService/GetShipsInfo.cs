@@ -3,24 +3,21 @@ using System.Text.Json;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using ShipService.Business.ShipCompartmentsCreation;
 using ShipService.Contracts.CreateShipCompartments;
 
 namespace ShipService
 {
-    public class CreateShipWithCompartments
+    public class GetShipsInfo
     {
-        private readonly IShipCreator _shipCreator;
         private readonly ILogger _logger;
 
-        public CreateShipWithCompartments(IShipCreator shipCreator, ILoggerFactory loggerFactory)
+        public GetShipsInfo(ILoggerFactory loggerFactory)
         {
-            _shipCreator = shipCreator;
-            _logger = loggerFactory.CreateLogger<CreateShipWithCompartments>();
+            _logger = loggerFactory.CreateLogger<GetShipsInfo>();
         }
 
-        [Function("CreateShipWithCompartments")]
-        public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req)
+        [Function("GetShipsInfo")]
+        public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 

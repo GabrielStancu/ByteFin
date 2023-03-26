@@ -1,8 +1,8 @@
 ﻿using MongoDB.Driver;
-using ShipService.Data.Models;
-using ShipService.Environment.Settings;
+using ShipService.Data;
+using ShipService.Persistence.Settings;
 
-namespace ShipService.Data.Repositories;
+namespace ShipService.Persistence;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : ModelBase
 {

@@ -1,11 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ShipService.Business.Extensions;
-using ShipService.Business.Services;
-using ShipService.Data.Models;
-using ShipService.Data.Repositories;
-using ShipService.Environment.Configuration;
-using ShipService.Environment.Settings;
+using ShipService.Business.ShipCompartmentsCreation;
+using ShipService.Business.ShipDataCollection;
+using ShipService.Configuration;
+using ShipService.Data;
+using ShipService.Persistence;
+using ShipService.Persistence.Settings;
 
 var host = new HostBuilder()
     .ConfigureServices((context, services) =>
@@ -23,8 +23,8 @@ var host = new HostBuilder()
         services.AddScoped(typeof(IDatabaseSettings<Compartment>), typeof(CompartmentSettings));
 
         // Configurations
-        services.AddConfiguration<DatabaseConfiguration>(context, "Database");
-        services.AddConfiguration<PrefixesConfiguration>(context, "Prefixes");
+        services.Configure<DatabaseConfiguration>(context.Configuration.GetSection(DatabaseConfiguration.SectionName));
+        services.Configure<PrefixesConfiguration>(context.Configuration.GetSection(PrefixesConfiguration.SectionName));
     })
     .ConfigureFunctionsWorkerDefaults()
     .Build();

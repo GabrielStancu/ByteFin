@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ShipService.Data.Models;
+namespace ShipService.Data;
 
 public class ModelBase
 {

@@ -1,6 +1,6 @@
-using ShipService.Data.Models;
+using ShipService.Data;
 
-namespace ShipService.Environment.Settings;
+namespace ShipService.Persistence.Settings;
 
 public interface IDatabaseSettings<T> where T : ModelBase
 {

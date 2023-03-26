@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataCollectionService", "DataCollectionService\DataCollectionService.csproj", "{D25D9BEF-FF1E-47C1-A5B1-09C11E343968}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShipService", "ShipService\ShipService.csproj", "{49F6E4B4-F858-442B-9EBC-ACDB585F101C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShipService", "ShipService\ShipService.csproj", "{49F6E4B4-F858-442B-9EBC-ACDB585F101C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

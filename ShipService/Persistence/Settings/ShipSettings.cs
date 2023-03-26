@@ -1,7 +1,7 @@
-using ShipService.Data.Models;
-using ShipService.Environment.Configuration;
+using ShipService.Configuration;
+using ShipService.Data;
 
-namespace ShipService.Environment.Settings;
+namespace ShipService.Persistence.Settings;
 
 public class ShipSettings : DatabaseSettings<Ship>
 {

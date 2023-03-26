@@ -1,4 +1,4 @@
-﻿namespace ShipService.Data.Models;
+﻿namespace ShipService.Data;
 
 public class Ship : ModelBase
 {

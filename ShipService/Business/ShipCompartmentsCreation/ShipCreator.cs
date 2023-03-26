@@ -1,9 +1,9 @@
-﻿using ShipService.Business.Dtos.Requests;
-using ShipService.Data.Models;
-using ShipService.Data.Repositories;
-using ShipService.Environment.Configuration;
+﻿using ShipService.Configuration;
+using ShipService.Contracts.CreateShipCompartments;
+using ShipService.Data;
+using ShipService.Persistence;
 
-namespace ShipService.Business.Services;
+namespace ShipService.Business.ShipCompartmentsCreation;
 
 public class ShipCreator : IShipCreator
 {
@@ -18,20 +18,22 @@ public class ShipCreator : IShipCreator
         _prefixesConfig = prefixesConfig;
     }
 
-    public async Task CreateShipWithCompartmentsAsync(CreateShipDto createShipDto)
+    public async Task CreateShipWithCompartmentsAsync(CreateShipCompartmentsRequest createShipCompartmentsRequest)
     {
-        if (createShipDto.CompartmentNames is null || !createShipDto.CompartmentNames.Any() || string.IsNullOrEmpty(createShipDto.ShipName))
+        if (createShipCompartmentsRequest.CompartmentNames is null || 
+            !createShipCompartmentsRequest.CompartmentNames.Any() || 
+            string.IsNullOrEmpty(createShipCompartmentsRequest.ShipName))
             return;
 
-        var shipId = $"{_prefixesConfig.Ship}_{createShipDto.ShipName}";
+        var shipId = $"{_prefixesConfig.Ship}_{createShipCompartmentsRequest.ShipName}";
         var tasks = new List<Task>();
-        var crateShipTask = CreateShipAsync(shipId, createShipDto.ShipName ?? string.Empty,
-            createShipDto.CreatedDate ?? DateTime.MinValue);
-        
+        var crateShipTask = CreateShipAsync(shipId, createShipCompartmentsRequest.ShipName ?? string.Empty,
+            createShipCompartmentsRequest.CreatedDate ?? DateTime.MinValue);
+
         tasks.Add(crateShipTask);
-        foreach (var compartmentName in createShipDto.CompartmentNames)
+        foreach (var compartmentName in createShipCompartmentsRequest.CompartmentNames)
         {
-            var createCompartmentTask = CreateCompartmentAsync(compartmentName!, shipId, createShipDto.ShipName!);
+            var createCompartmentTask = CreateCompartmentAsync(compartmentName!, shipId, createShipCompartmentsRequest.ShipName!);
             tasks.Add(createCompartmentTask);
         }
 

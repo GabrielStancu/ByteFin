@@ -1,9 +1,9 @@
 ﻿using System.Collections.Concurrent;
-using ShipService.Business.Dtos.Replies;
-using ShipService.Data.Models;
-using ShipService.Data.Repositories;
+using ShipService.Contracts.CreateShipCompartments;
+using ShipService.Data;
+using ShipService.Persistence;
 
-namespace ShipService.Business.Services;
+namespace ShipService.Business.ShipDataCollection;
 
 public class ShipCompartmentsCollector : IShipCompartmentsCollector
 {
@@ -16,16 +16,16 @@ public class ShipCompartmentsCollector : IShipCompartmentsCollector
         _compartmentRepository = compartmentRepository;
     }
 
-    public async Task<IEnumerable<ShipCompartmentsDto>> GetCompartmentsAsync()
+    public async Task<IEnumerable<ShipCompartmentsResponse>> GetCompartmentsAsync()
     {
         var ships = await _shipRepository.GetAllAsync();
         var shipIds = ships?.Select(s => s?.Id).ToList();
 
         if (shipIds is null || !shipIds.Any())
-            return Enumerable.Empty<ShipCompartmentsDto>();
+            return Enumerable.Empty<ShipCompartmentsResponse>();
 
         var getCompartmentsTasks = new List<Task>();
-        var shipCompartments = new ConcurrentBag<ShipCompartmentsDto>();
+        var shipCompartments = new ConcurrentBag<ShipCompartmentsResponse>();
 
         foreach (var shipId in shipIds)
         {
@@ -38,10 +38,10 @@ public class ShipCompartmentsCollector : IShipCompartmentsCollector
         return shipCompartments;
     }
 
-    private async Task GetShipCompartmentsAsync(ConcurrentBag<ShipCompartmentsDto> shipCompartments, string shipId)
+    private async Task GetShipCompartmentsAsync(ConcurrentBag<ShipCompartmentsResponse> shipCompartments, string shipId)
     {
         var compartments = await _compartmentRepository.GetAllShipCompartmentsAsync(shipId);
-        var shipWithCompartments = new ShipCompartmentsDto
+        var shipWithCompartments = new ShipCompartmentsResponse
         {
             ShipId = shipId,
             CompartmentIds = compartments.Select(c => c.Id)

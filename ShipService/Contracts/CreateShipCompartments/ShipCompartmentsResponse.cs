@@ -1,6 +1,6 @@
-﻿namespace ShipService.Business.Dtos.Replies;
+﻿namespace ShipService.Contracts.CreateShipCompartments;
 
-public class ShipCompartmentsDto
+public class ShipCompartmentsResponse
 {
     public string? ShipId { get; set; }
     public IEnumerable<string?>? CompartmentIds { get; set; }

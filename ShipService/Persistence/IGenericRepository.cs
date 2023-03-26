@@ -1,6 +1,6 @@
-﻿using ShipService.Data.Models;
+﻿using ShipService.Data;
 
-namespace ShipService.Data.Repositories;
+namespace ShipService.Persistence;
 
 public interface IGenericRepository<T> where T : ModelBase
 {

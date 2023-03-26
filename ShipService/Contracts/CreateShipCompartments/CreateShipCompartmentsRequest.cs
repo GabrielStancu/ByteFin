@@ -1,6 +1,6 @@
-﻿namespace ShipService.Business.Dtos.Requests;
+﻿namespace ShipService.Contracts.CreateShipCompartments;
 
-public class CreateShipDto
+public class CreateShipCompartmentsRequest
 {
     public string? ShipName { get; set; }
     public DateTime? CreatedDate { get; set; }
