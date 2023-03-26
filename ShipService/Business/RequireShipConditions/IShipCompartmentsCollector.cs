@@ -1,6 +1,6 @@
-﻿using ShipService.Contracts.CreateShipCompartments;
+﻿using ShipService.Contracts.RequireShipCondition;
 
-namespace ShipService.Business.ShipDataCollection;
+namespace ShipService.Business.RequireShipConditions;
 
 public interface IShipCompartmentsCollector
 {

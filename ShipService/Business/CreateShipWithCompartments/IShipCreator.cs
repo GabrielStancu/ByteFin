@@ -1,6 +1,6 @@
 ﻿using ShipService.Contracts.CreateShipCompartments;
 
-namespace ShipService.Business.ShipCompartmentsCreation;
+namespace ShipService.Business.CreateShipWithCompartments;
 
 public interface IShipCreator
 {

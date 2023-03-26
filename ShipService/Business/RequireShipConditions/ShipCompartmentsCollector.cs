@@ -1,16 +1,15 @@
 ﻿using System.Collections.Concurrent;
-using ShipService.Contracts.CreateShipCompartments;
-using ShipService.Data;
+using ShipService.Contracts.RequireShipCondition;
 using ShipService.Persistence;
 
-namespace ShipService.Business.ShipDataCollection;
+namespace ShipService.Business.RequireShipConditions;
 
 public class ShipCompartmentsCollector : IShipCompartmentsCollector
 {
-    private readonly IGenericRepository<Ship> _shipRepository;
+    private readonly IShipRepository _shipRepository;
     private readonly ICompartmentRepository _compartmentRepository;
 
-    public ShipCompartmentsCollector(IGenericRepository<Ship> shipRepository, ICompartmentRepository compartmentRepository)
+    public ShipCompartmentsCollector(IShipRepository shipRepository, ICompartmentRepository compartmentRepository)
     {
         _shipRepository = shipRepository;
         _compartmentRepository = compartmentRepository;

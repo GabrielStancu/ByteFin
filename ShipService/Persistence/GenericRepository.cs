@@ -26,9 +26,15 @@ public class GenericRepository<T> : IGenericRepository<T> where T : ModelBase
         return await entity.FirstOrDefaultAsync();
     }
 
-    public async Task<IEnumerable<T?>?> GetAllAsync()
+    public async Task<IEnumerable<T>> GetAllAsync()
     {
         var entities = await Collection.FindAsync(FilterDefinition<T>.Empty);
+        return await entities.ToListAsync();
+    }
+
+    public async Task<IEnumerable<T>> GetAllNotDeletedAsync()
+    {
+        var entities = await Collection.FindAsync(e => !e.Deleted);
         return await entities.ToListAsync();
     }
 

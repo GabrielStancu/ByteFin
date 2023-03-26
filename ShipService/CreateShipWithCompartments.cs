@@ -3,7 +3,7 @@ using System.Text.Json;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using ShipService.Business.ShipCompartmentsCreation;
+using ShipService.Business.CreateShipWithCompartments;
 using ShipService.Contracts.CreateShipCompartments;
 
 namespace ShipService

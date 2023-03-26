@@ -3,15 +3,15 @@ using ShipService.Contracts.CreateShipCompartments;
 using ShipService.Data;
 using ShipService.Persistence;
 
-namespace ShipService.Business.ShipCompartmentsCreation;
+namespace ShipService.Business.CreateShipWithCompartments;
 
 public class ShipCreator : IShipCreator
 {
-    private readonly IGenericRepository<Ship> _shipRepository;
+    private readonly IShipRepository _shipRepository;
     private readonly ICompartmentRepository _compartmentRepository;
     private readonly PrefixesConfiguration _prefixesConfig;
 
-    public ShipCreator(IGenericRepository<Ship> shipRepository, ICompartmentRepository compartmentRepository, PrefixesConfiguration prefixesConfig)
+    public ShipCreator(IShipRepository shipRepository, ICompartmentRepository compartmentRepository, PrefixesConfiguration prefixesConfig)
     {
         _shipRepository = shipRepository;
         _compartmentRepository = compartmentRepository;
@@ -44,7 +44,7 @@ public class ShipCreator : IShipCreator
     {
         var ship = new Ship
         {
-            Id = id,
+            Id = id.Replace(" ", "-"),
             BuildTime = createdDate,
             Name = shipName,
             Deleted = false
@@ -58,7 +58,7 @@ public class ShipCreator : IShipCreator
         var id = $"{_prefixesConfig.Compartment}_{shipName}_{compartmentName}";
         var compartment = new Compartment
         {
-            Id = id,
+            Id = id.Replace(" ", "-"),
             Name = compartmentName,
             ShipId = shipId,
             Deleted = false

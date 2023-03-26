@@ -3,35 +3,36 @@ using System.Text.Json;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
+using ShipService.Business.GetShipsInfo;
 using ShipService.Contracts.CreateShipCompartments;
 
 namespace ShipService
 {
     public class GetShipsInfo
     {
+        private readonly IShipInfoService _shipInfoService;
         private readonly ILogger _logger;
 
-        public GetShipsInfo(ILoggerFactory loggerFactory)
+        public GetShipsInfo(IShipInfoService shipInfoService, ILoggerFactory loggerFactory)
         {
+            _shipInfoService = shipInfoService;
             _logger = loggerFactory.CreateLogger<GetShipsInfo>();
         }
 
         [Function("GetShipsInfo")]
-        public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req)
+        public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequestData req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
-            var jsonRequest = await req.ReadAsStringAsync() ?? string.Empty;
-            var createShip = JsonSerializer.Deserialize<CreateShipCompartmentsRequest>(jsonRequest);
+            var shipsInfoResponse = await _shipInfoService.GetShipsInfoAsync();
+            var jsonShipsInfoResponse = JsonSerializer.Serialize(shipsInfoResponse);
 
-            if (createShip is null)
-                return req.CreateResponse(HttpStatusCode.BadRequest);
+            _logger.LogInformation($"Found info about the following ships: [{jsonShipsInfoResponse}]");
 
-            _logger.LogInformation($"Received the following request: [{jsonRequest}]");
-            await _shipCreator.CreateShipWithCompartmentsAsync(createShip);
-            _logger.LogInformation("Created ship with compartments.");
+            var response = req.CreateResponse(HttpStatusCode.OK);
+            await response.WriteStringAsync(jsonShipsInfoResponse);
 
-            return req.CreateResponse(HttpStatusCode.Created);
+            return response;
         }
     }
 }

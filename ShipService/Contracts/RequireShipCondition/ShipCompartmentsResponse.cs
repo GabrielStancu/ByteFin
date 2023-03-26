@@ -1,4 +1,4 @@
-﻿namespace ShipService.Contracts.CreateShipCompartments;
+﻿namespace ShipService.Contracts.RequireShipCondition;
 
 public class ShipCompartmentsResponse
 {
